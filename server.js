@@ -7,6 +7,7 @@ const userRoutes = require('./routes/users');
 const postRoutes = require('./routes/posts'); // ✅ Make sure this is valid
 const db = require('./config/db');
 const path = require('path');
+const commentRoutes = require('./routes/comments');
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ db.getConnection()
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes); // ✅ This is your posts route
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve images
+app.use('/api/comments', commentRoutes);
 
 // Protected test
 app.get('/api/protected', authMiddleware, (req, res) => {
