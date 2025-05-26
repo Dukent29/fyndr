@@ -23,13 +23,19 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM posts ORDER BY created_at DESC');
+    const [rows] = await pool.query(`
+      SELECT posts.*, users.username 
+      FROM posts 
+      JOIN users ON posts.user_id = users.id 
+      ORDER BY posts.created_at DESC
+    `);
     res.json(rows);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 const deletePost = async (req, res) => {
   const postId = req.params.id;

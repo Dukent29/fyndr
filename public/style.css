@@ -2,9 +2,9 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-  font-family: sans-serif;
-  background-color: #121212;
-  color: white;
+  font-family: Poppins, BlinkMacSystemFont, sans-serif;
+  background-color: #000;
+  color: #fff;
 }
 
 .container {
@@ -14,20 +14,18 @@ body {
   flex-direction: column;
 }
 
-section.stories {
-  padding: 1rem;
-  overflow-x: auto;
-}
+
 
 .stories-wrapper {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .story {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 64px;
 }
 
 .story-ring {
@@ -35,44 +33,58 @@ section.stories {
   height: 64px;
   border-radius: 50%;
   padding: 2px;
-  background: linear-gradient(45deg, #ff00cc, #3333ff);
+  background: linear-gradient(45deg, #ff003c, #ff66ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ring-current-user {
-  background: #00ffcc;
+  background: #00ffc3;
 }
 
 .story img {
-  width: 100%;
-  height: 100%;
+  width: 58px;
+  height: 58px;
   object-fit: cover;
   border-radius: 50%;
 }
 
 .story p {
   margin-top: 0.25rem;
-  font-size: 0.75rem;
-  color: #ccc;
+  font-size: 0.7rem;
+  color: #aaa;
+  text-align: center;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 main.feed {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 0 1rem 6rem 1rem;
+  padding: 1rem;
 }
 
 article.card-post {
   background-color: #1e1e1e;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .card-post .header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   padding: 1rem;
+}
+
+.card-post .header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .card-post .header img {
@@ -83,11 +95,26 @@ article.card-post {
 
 .card-post .header div p:first-child {
   font-weight: bold;
+  color: #fff;
+  margin: 0;
 }
 
 .card-post .header div p:last-child {
   font-size: 0.75rem;
   color: #aaa;
+  margin: 0;
+}
+
+.card-post .header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-post .header-right .msg-icon {
+  background-color: #f4b400;
+  padding: 6px;
+  border-radius: 6px;
 }
 
 .card-post .post-image {
@@ -95,18 +122,30 @@ article.card-post {
   height: 360px;
   object-fit: cover;
   user-select: none;
+  background-color: #000;
 }
 
 .card-post .body {
   padding: 1rem;
 }
 
-.card-post .body .actions {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.75rem;
+.card-post .body p {
   font-size: 0.875rem;
   color: #ccc;
+}
+
+.card-post .body .actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.card-post .body .actions-left {
+  display: flex;
+  gap: 1.2rem;
 }
 
 footer {
@@ -119,6 +158,7 @@ footer {
   justify-content: space-around;
   padding: 0.75rem 0;
   border-top: 1px solid #333;
+  z-index: 100;
 }
 
 footer button {
@@ -133,5 +173,106 @@ footer button {
 }
 
 footer button.active {
-  color: white;
+  color: #ff2d55;
+}
+
+/* Fixer la barre de stories */
+section.stories {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #000;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #222;
+}
+
+.stories-slider {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fixer le header (logo) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: #000;
+}
+
+/* Supprimer complÃ¨tement la barre de scroll horizontale */
+.stories-slider {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.stories-slider::-webkit-scrollbar {
+  display: none;             /* Chrome/Safari */
+}
+
+/* Fixer les stories juste sous le logo */
+section.stories {
+  position: sticky;
+  top: 48px;
+  z-index: 15;
+}
+.post-card {
+  background: #000;
+  color: #fff;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: sans-serif;
+  max-width: 500px;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.username-time small {
+  display: block;
+  font-size: 12px;
+  color: gray;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.caption {
+  padding: 10px;
+  margin: 0!important;
+}
+
+.post-actions {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+div#commentDrawer {
+  z-index: 999;
+  background-color: #1a1a1a;
+  width: 390px;
 }

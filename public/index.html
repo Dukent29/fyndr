@@ -1,98 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fyndr - Homepage</title>
-</head>
-
-<body>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>Fyndr - Homepage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head> 
+<body>  
   <div class="container">
+
+    <!-- Logo -->
+    <header style="display:flex; justify-content:center; padding:0.75rem 0; border-bottom: 1px solid #222;">
+      <img src="fyndr/public/logo1.png" alt="Logo" style="height:24px;">
+    </header>
+
+    <!-- Stories -->
     <section class="stories">
-      <div class="stories-wrapper">
-        <div class="story">
-          <div class="story-ring ring-current-user">
-            <img src="https://i.pravatar.cc/100?u=1" alt="You">
-          </div>
-          <p>You</p>
-        </div>
-        <div class="story">
-          <div class="story-ring">
-            <img src="https://i.pravatar.cc/100?u=2" alt="Linz">
-          </div>
-          <p>Linz</p>
-        </div>
-        <div class="story">
-          <div class="story-ring">
-            <img src="https://i.pravatar.cc/100?u=3" alt="Shub">
-          </div>
-          <p>Shub</p>
-        </div>
-        <div class="story">
-          <div class="story-ring">
-            <img src="https://i.pravatar.cc/100?u=4" alt="Jayk">
-          </div>
-          <p>Jayk</p>
-        </div>
+      <div class="stories-slider">
+        <div class="story"><div class="story-ring ring-current-user"><img src="https://i.pravatar.cc/100?u=1" alt="You"></div><p>You</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=2" alt="Linz"></div><p>Linz</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=3" alt="Shub"></div><p>Shub</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=4" alt="Jayk"></div><p>Jayk</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=5" alt="Emma"></div><p>Emma</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=6" alt="Noah"></div><p>Noah</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=7" alt="Léa"></div><p>Léa</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=8" alt="Max"></div><p>Max</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=9" alt="Zoé"></div><p>Zoé</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=10" alt="Tom"></div><p>Tom</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=11" alt="Chloé"></div><p>Chloé</p></div>
+        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=12" alt="Alex"></div><p>Alex</p></div>
       </div>
     </section>
 
-    <main class="feed">
-      <article class="card-post">
-        <div class="header">
-          <img src="https://i.pravatar.cc/100?u=10" alt="VinceDsgnr_">
-          <div>
-            <p>VinceDsgnr_</p>
-            <p>il y a 10 min</p>
-          </div>
-        </div>
-        <img src="https://source.unsplash.com/400x500/?gaming,team" class="post-image" alt="Post">
-        <div class="body">
-          <p>Fanday terminé 🟣 Super ambiance 🔥🔥🔥</p>
-          <div class="actions">
-            <span>❤️ 34</span>
-            <span>💬 Commenter</span>
-            <span>📩 Message</span>
-          </div>
-        </div>
-      </article>
+    <!-- Posts Slider -->
+    <main>
+      <section id="postSection">
+  <h2>Latest Posts</h2>
+  <div id="postList" class="post-list">
+    <!-- Posts will be injected here dynamically -->
+  </div>
+</section>
 
-      <article class="card-post">
-        <div class="header">
-          <img src="https://i.pravatar.cc/100?u=11" alt="Aew0_">
-          <div>
-            <p>Aew0_</p>
-            <p>il y a 25 min</p>
-          </div>
-        </div>
-        <img src="https://source.unsplash.com/400x500/?esports" class="post-image" alt="Post">
-        <div class="body">
-          <p>On est chaud ce soir. RDV 21h pour le match !</p>
-          <div class="actions">
-            <span>❤️ 12</span>
-            <span>💬 Commenter</span>
-            <span>📩 Message</span>
-          </div>
-        </div>
-      </article>
+
     </main>
 
-    <footer>
-      <button class="active">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10l8-8 8 8H2z"/></svg>
-        Accueil
-      </button>
-      <button>
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h12v12H4z"/></svg>
-        Explorer
-      </button>
-      <button>
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12l6-6H4z"/></svg>
-        Messages
-      </button>
+    <!-- Footer -->
+    <footer class="footer">
+      <button class="active"><i data-lucide="home"></i></button>
+      <button><i data-lucide="globe"></i></button>
+      <button class="fyndr-button"><img src="logo-fyndr.png" alt="Fyndr"></button>
+      <button><i data-lucide="message-circle"></i></button>
+      <button><i data-lucide="user"></i></button>
     </footer>
+
+    <!-- Comment Drawer -->
+<div id="commentDrawer" class="fixed bottom-0 left-1/2 
+  transform -translate-x-1/2 translate-y-full 
+  bg-white shadow-lg border-t 
+  max-h-[60vh]
+  overflow-y-auto 
+  transition-transform duration-300 
+   rounded-t-xl ">
+  <div class="flex justify-between items-center p-4 ">
+    <h3 class="text-lg font-semibold">Commentaires</h3>
+    <button id="closeDrawerBtn" class="text-gray-500 hover:text-red-500 text-xl">&times;</button>
   </div>
-</body>
-    
-   
-</html>
+  <div id="commentsContainer" class="p-4 space-y-4">
+    <!-- Comments will appear here -->
+  </div>
+</div>
+
+    <script>lucide.createIcons();</script>
+  </div> 
+  <script src="js/fetchPost.js"></script>
+  <script src="js/comments.js"></script>
+  <script src="js/drawer.js"></script>
+
+ 
+</body> 
+</html> 
