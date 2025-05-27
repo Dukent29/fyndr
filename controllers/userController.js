@@ -1,35 +1,43 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const pool = require('../config/db');
-const { findUserByEmail } = require('../models/user');
+const { findUserByEmail, createUser } = require('../models/user');
 const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, phone, dob } = req.body;
 
-  if (!username || !email || !password) {
-    return res.status(400).json({ message: 'Username, email and password are required' });
+  if (!username || !email || !password || !phone || !dob) {
+    return res.status(400).json({ message: 'Tous les champs sont requis' });
   }
 
   try {
     const existing = await findUserByEmail(email);
     if (existing) {
-      return res.status(409).json({ message: 'User already exists' });
+      return res.status(409).json({ message: 'Utilisateur déjà existant' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const id = uuidv4();
     const createdAt = new Date();
 
-    await pool.query(
-      'INSERT INTO users (id, username, email, password, created_at) VALUES (?, ?, ?, ?, ?)',
-      [id, username, email, hashedPassword, createdAt]
-    );
+    await createUser({
+      id,
+      username,
+      email,
+      password: hashedPassword,
+      phone,
+      dob,
+      createdAt
+    });
 
-    res.status(201).json({ message: 'User registered!', user: { id, username, email, createdAt } });
+    res.status(201).json({
+      message: 'Utilisateur enregistré !',
+      user: { id, username, email, phone, dob, createdAt }
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Erreur serveur' });
   }
 };
 const login = async (req, res) => {

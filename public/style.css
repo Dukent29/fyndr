@@ -276,3 +276,12 @@ div#commentDrawer {
   background-color: #1a1a1a;
   width: 390px;
 }
+.fyndr-button{
+  width: 32px;
+}
+.fyndr-button img{
+  border-radius: 10px;
+}
+input#commentInput {
+    color: black!important;
+}
