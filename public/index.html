@@ -50,10 +50,16 @@
     <!-- Footer -->
     <footer class="footer">
       <button class="active"><i data-lucide="home"></i></button>
-      <button><i data-lucide="globe"></i></button>
+      <a href="">
+        <button><i data-lucide="globe"></i></button>
+      </a>
       <button class="fyndr-button"><img src="assets/images/logo-fyndr.png" alt="Fyndr"></button>
-      <button><i data-lucide="message-circle"></i></button>
-      <button><i data-lucide="user"></i></button>
+      <a href="messages.html">
+        <button><i data-lucide="message-circle"></i></button>
+      </a>
+      <a href="">
+        <button><i data-lucide="user"></i></button>
+      </a>
     </footer>
 
     <!-- Comment Drawer -->
@@ -87,11 +93,8 @@
 
     <script>lucide.createIcons();</script>
   </div> 
-<!-- <script src="js/add-comment.js"></script>     Définit currentPostId + openCommentDrawer -->
  <script src="js/fetchPost.js"></script>
-<!-- <script src="js/drawer.js"></script>          Ouvre/Ferme le drawer -->
-
-<!-- <script src="js/authGuard.js"></script>       (optionnel, sécurité) -->
+<script src="js/authGuard.js"></script>
 <script src="js/comments.js"></script>
 
  

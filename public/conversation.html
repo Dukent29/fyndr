@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>💬 Conversation</h2>
+
+  <div id="message-list"></div> <!-- important pour injecter dynamiquement -->
+
+  <form id="message-form" data-receiver-id="">
+    <input type="text" id="message-input" name="content" required />
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script src="js/conversation.js"></script>
+</body>
+</html>
