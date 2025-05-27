@@ -51,7 +51,7 @@
     <footer class="footer">
       <button class="active"><i data-lucide="home"></i></button>
       <button><i data-lucide="globe"></i></button>
-      <button class="fyndr-button"><img src="logo-fyndr.png" alt="Fyndr"></button>
+      <button class="fyndr-button"><img src="assets/images/logo-fyndr.png" alt="Fyndr"></button>
       <button><i data-lucide="message-circle"></i></button>
       <button><i data-lucide="user"></i></button>
     </footer>
@@ -71,13 +71,28 @@
   <div id="commentsContainer" class="p-4 space-y-4">
     <!-- Comments will appear here -->
   </div>
+<!-- formulaire -->
+  <form id="commentForm" class="flex items-center border-t p-4 bg-transparent">
+    <input type="text" id="commentInput" placeholder="Ajouter un commentaire..." class="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring"
+      required
+    />
+    <button 
+      type="submit" 
+      class="ml-2 text-blue-500 font-semibold hover:text-blue-600"
+    >
+      Publier
+    </button>
+  </form>
 </div>
 
     <script>lucide.createIcons();</script>
   </div> 
-  <script src="js/fetchPost.js"></script>
-  <script src="js/comments.js"></script>
-  <script src="js/drawer.js"></script>
+<!-- <script src="js/add-comment.js"></script>     Définit currentPostId + openCommentDrawer -->
+ <script src="js/fetchPost.js"></script>
+<!-- <script src="js/drawer.js"></script>          Ouvre/Ferme le drawer -->
+
+<!-- <script src="js/authGuard.js"></script>       (optionnel, sécurité) -->
+<script src="js/comments.js"></script>
 
  
 </body> 

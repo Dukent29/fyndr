@@ -6,7 +6,7 @@ function attachCommentListeners() {
   document.querySelectorAll('.openCommentBtn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const postId = btn.getAttribute('data-post-id');
-      
+      currentPostId = postId;
       // 👇 Affiche le drawer
       drawer.classList.remove('translate-y-full');
 

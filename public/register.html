@@ -1,0 +1,23 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription</title>
+</head>
+<body>
+  <h2>Inscription</h2>
+  <form id="registerForm">
+    <input type="text" id="regUsername" placeholder="Nom d'utilisateur" required><br>
+    <input type="email" id="regEmail" placeholder="Email" required><br>
+    <input type="password" id="regPassword" placeholder="Mot de passe" required><br>
+    <input type="tel" id="regPhone" placeholder="Téléphone" required><br>
+    <input type="date" id="regDob" required><br>
+    <button type="submit">S'inscrire</button>
+  </form>
+
+  <script src="js/auth.js"></script>
+  <script src="js/redirectIfAuthenticated.js"></script>
+
+</body>
+</html>
