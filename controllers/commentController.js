@@ -1,4 +1,4 @@
-const pool = require('../config/db'); // your DB connection
+const pool = require('../config/db'); 
 
 // Add a comment to a specific post
 const addComment = async (req, res) => {
@@ -11,7 +11,7 @@ const addComment = async (req, res) => {
   }
 
   try {
-    // 1. Insert the comment
+   
     const [result] = await pool.query(
       'INSERT INTO comments (post_id, user_id, text, created_at) VALUES (?, ?, ?, NOW())',
       [postId, user_id, text]
@@ -19,7 +19,7 @@ const addComment = async (req, res) => {
 
     const commentId = result.insertId;
 
-    // 2. Fetch the inserted comment with username
+    
     const [rows] = await pool.query(
       `SELECT c.id, c.text, c.created_at, u.username 
        FROM comments c 
@@ -28,7 +28,7 @@ const addComment = async (req, res) => {
       [commentId]
     );
 
-    // 3. Return the comment to the frontend
+    
     res.status(201).json(rows[0]);
   } catch (err) {
     console.error(err);
@@ -36,7 +36,7 @@ const addComment = async (req, res) => {
   }
 };
 
-// Get all comments for a specific post
+
 const getCommentsByPost = async (req, res) => {
   const { postId } = req.params;
 
