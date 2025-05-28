@@ -53,7 +53,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email' });
     }
 
-    // Normally you'd check the password here as well
+   
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET,
@@ -76,8 +76,7 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  // If you're using cookies:
-  // res.clearCookie('token');
+  
   
   res.status(200).json({ message: 'Logout successful' });
 };
