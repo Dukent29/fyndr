@@ -2,7 +2,307 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Fyndr - Feed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>rFeed Scroll</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 100vh;
+  aspect-ratio: 9 / 16;
+  max-height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 430px;
+}
+
+.scroll-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  z-index: 0;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.video-slide {
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.video-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Interface fixe */
+.header,
+.actions,
+.overlay,
+.bottom-nav {
+  position: absolute;
+  z-index: 2;
+}
+
+.header {
+  top: 40px;
+  width: 100%;
+  padding: 0 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rFeed-title {
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.rFeed-title .underline {
+  text-decoration: underline;
+  margin-left: 2px;
+}
+
+.actions {
+  right: 10px;
+  bottom: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  font-size: 24px;
+  color: white;
+  padding-right: 6px;
+}
+
+.like-btn {
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.like-btn .bi-suit-heart-fill {
+  font-size: 30px;
+  transition: color 0.3s;
+}
+
+.like-btn .liked {
+  color: #E83338;
+}
+
+.like-btn .count {
+  font-size: 14px;
+  margin-top: 4px;
+  text-align: center;
+}
+
+.overlay {
+  bottom: 140px;
+  left: 20px;
+  max-width: 280px;
+  transform: scale(1.05);
+}
+
+.user {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.verified {
+  color: #E83338;
+  margin-left: 4px;
+}
+
+.description {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.discussion-btn {
+  padding: 6px 12px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.discussion-btn.active,
+.discussion-btn:active {
+  background-color: #E83338;
+  border-color: #E83338;
+}
+
+.bottom-nav {
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px;
+  color: white;
+}
+.bottom-nav a{
+  color: #fff;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  background-color: #E83338;
+  padding: 4px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+</style>
+<body>
+
+<div class="container">
+
+  <!-- Interface fixe -->
+  <div class="header">
+    <i class="bi bi-search"></i>
+    <h1 class="rFeed-title"><span class="r">r</span><span class="underline">Feed</span></h1>
+    <i class="bi bi-three-dots"></i>
+  </div>
+
+  <div class="actions">
+    <div class="like-btn" onclick="toggleLike(this)">
+      <i class="bi bi-suit-heart-fill"></i>
+      <span class="count">428</span>
+    </div>
+    <i class="bi bi-chat-dots"></i>
+    <i class="bi bi-send"></i>
+  </div>
+
+  <div class="overlay">
+    <div class="user">@Aew0_ <span class="verified">✔️</span></div>
+    <p class="description">Ceci est une description. Lorem ipsum dolor sit amet...</p>
+    <button class="discussion-btn" onclick="this.classList.toggle('active')">Démarrer la discussion →</button>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">
+      <i class="bi bi-house-door"></i>
+    </a>
+    <a href="feed.html">
+      <i class="bi bi-globe"></i>
+    </a>
+    <a href="add-post.html">
+      <img src="assets/images/logo-fyndr.png" alt="Logo Fyndr" class="nav-logo" />
+    </a>
+    <a href="messages.html">
+      <i class="bi bi-chat-left"></i>
+    </a>
+    <a href="profile.html">
+      <i class="bi bi-person"></i>
+    </a>
+  </div>
+
+  <!-- Scrollable vidéos -->
+  <div class="scroll-container">
+    <section class="video-slide">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/ssstik.io_eslcounterstrike_1748433404970.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+    <section class="video-slide">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/ssstik.io_atl_e.sport_1748433479419.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+    <section class="video-slide">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/ssstik.io_eslcounterstrike_1748433572560.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+    <section class="video-slide">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/ssstik.io_g2esports_1748433506253.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+    <section class="video-slide">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/ssstik.io_teamvitality_1748313118073.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+    <section class="video-slide">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/ssstik.io_teamvitality_1748433538027.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<script>
+  function toggleLike(el) {
+    const icon = el.querySelector("i");
+    const count = el.querySelector(".count");
+    icon.classList.toggle("liked");
+    const current = parseInt(count.textContent);
+    count.textContent = icon.classList.contains("liked") ? current + 1 : current - 1;
+  }
+</script>
+
+</body>
+</html>

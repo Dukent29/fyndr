@@ -25,18 +25,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     messageList.innerHTML = '';
 
     messages.forEach(msg => {
-      const div = document.createElement('div');
-      div.classList.add('message');
+  const div = document.createElement('div');
+  div.classList.add('message');
 
-      // If your API doesn't provide is_sender, add logic to detect current user
-      const currentUser = parseJwt(token).userId;
-      const isSender = msg.sender_id === currentUser;
+  const currentUser = parseJwt(token).userId;
+  const isSender = msg.sender_id === currentUser;
 
-      div.classList.add(isSender ? 'sender' : 'receiver');
+  div.classList.add(isSender ? 'sender' : 'receiver');
 
-      div.innerHTML = `${msg.content}`;
-      messageList.appendChild(div);
-    });
+  div.innerHTML = `
+    <div>${msg.content}</div>
+    <div style="font-size: 10px; color: gray; margin-top: 4px; ">${msg.sender_username}</div>
+  `;
+
+  messageList.appendChild(div);
+});
 
     // Auto-scroll to bottom
     messageList.scrollTop = messageList.scrollHeight;
