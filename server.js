@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const authMiddleware = require('./middleware/auth');
 const userRoutes = require('./routes/users');
-const postRoutes = require('./routes/posts'); // ✅ Make sure this is valid
+const postRoutes = require('./routes/posts'); 
 const db = require('./config/db');
 const path = require('path');
 const commentRoutes = require('./routes/comments');
@@ -20,12 +20,12 @@ app.use(bodyParser.json());
 
 // Test DB connection
 db.getConnection()
-  .then(() => console.log('✅ Connected to MySQL'))
-  .catch(err => console.error('❌ MySQL connection failed:', err));
+  .then(() => console.log(' Connected to MySQL'))
+  .catch(err => console.error(' MySQL connection failed:', err));
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes); // ✅ This is your posts route
+app.use('/api/posts', postRoutes); 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve images
 app.use('/api/comments', commentRoutes);
 app.use('/api/messages', messageRoutes);
@@ -37,5 +37,5 @@ app.get('/api/protected', authMiddleware, (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(` Server running at http://localhost:${PORT}`);
 });
