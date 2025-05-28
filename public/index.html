@@ -14,7 +14,7 @@
 
     <!-- Logo -->
     <header style="display:flex; justify-content:center; padding:0.75rem 0; border-bottom: 1px solid #222;">
-      <img src="fyndr/public/logo1.png" alt="Logo" style="height:24px;">
+      <img src="assets/images/logo-1.png" alt="Logo" style="height:24px;">
     </header>
 
     <!-- Stories -->
@@ -50,14 +50,22 @@
     <!-- Footer -->
     <footer class="footer">
       <button class="active"><i data-lucide="home"></i></button>
-      <button><i data-lucide="globe"></i></button>
-      <button class="fyndr-button"><img src="assets/images/logo-fyndr.png" alt="Fyndr"></button>
-      <button><i data-lucide="message-circle"></i></button>
-      <button><i data-lucide="user"></i></button>
+      <a href="">
+        <button><i data-lucide="globe"></i></button>
+      </a>
+      <a href="add-post.html">
+        <button class="fyndr-button"><img src="assets/images/logo-fyndr.png" alt="Fyndr"></button>
+      </a>
+      <a href="messages.html">
+        <button><i data-lucide="message-circle"></i></button>
+      </a>
+      <a href="profile.html">
+        <button><i data-lucide="user"></i></button>
+      </a>
     </footer>
 
     <!-- Comment Drawer -->
-<div id="commentDrawer" class="fixed bottom-0 left-1/2 
+    <div id="commentDrawer" class="fixed bottom-0 left-1/2 
   transform -translate-x-1/2 translate-y-full 
   bg-white shadow-lg border-t 
   max-h-[60vh]
@@ -83,15 +91,12 @@
       Publier
     </button>
   </form>
-</div>
+    </div>
 
     <script>lucide.createIcons();</script>
   </div> 
-<!-- <script src="js/add-comment.js"></script>     Définit currentPostId + openCommentDrawer -->
  <script src="js/fetchPost.js"></script>
-<!-- <script src="js/drawer.js"></script>          Ouvre/Ferme le drawer -->
-
-<!-- <script src="js/authGuard.js"></script>       (optionnel, sécurité) -->
+<script src="js/authGuard.js"></script>
 <script src="js/comments.js"></script>
 
  

@@ -14,8 +14,6 @@ body {
   flex-direction: column;
 }
 
-
-
 .stories-wrapper {
   display: flex;
   gap: 0.8rem;
@@ -285,3 +283,37 @@ div#commentDrawer {
 input#commentInput {
     color: black!important;
 }
+.message-card {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.message-card:hover {
+  background: #f9f9f9;
+}
+.msg {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 70%;
+}
+.msg.sent {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  text-align: right;
+}
+.msg.received {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+  text-align: left;
+}
+#messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+/* profile */
