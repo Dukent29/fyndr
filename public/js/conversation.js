@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   messageForm.dataset.receiverId = receiverId;
 
-  // Load conversation messages
+  
   try {
     const res = await fetch(`http://localhost:3000/api/messages/conversation/${receiverId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   messageList.appendChild(div);
 });
 
-    // Auto-scroll to bottom
+   
     messageList.scrollTop = messageList.scrollHeight;
 
   } catch (err) {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     messageList.innerHTML = '<p>Erreur lors du chargement des messages.</p>';
   }
 
-  // Submit new message
+  
   messageForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!res.ok) throw new Error('Erreur d’envoi');
 
       messageInput.value = '';
-      location.reload(); // Simple refresh for now
+      location.reload(); 
     } catch (err) {
       console.error("Erreur d'envoi :", err);
       alert("Erreur lors de l'envoi");
     }
   });
 
-  // Helper to decode JWT and extract userId
+
   function parseJwt(token) {
     try {
       const base64Url = token.split('.')[1];
