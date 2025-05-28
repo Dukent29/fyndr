@@ -1,4 +1,4 @@
-let currentPostId = null; // Globally track which post the drawer is open for
+let currentPostId = null; 
 
 document.addEventListener('DOMContentLoaded', fetchAndDisplayPosts);
 
@@ -51,7 +51,7 @@ async function fetchAndDisplayPosts() {
   }
 }Z
 
-// Attach listeners to comment buttons and drawer
+
 function attachCommentListeners() {
   const drawer = document.getElementById('commentDrawer');
   const closeDrawerBtn = document.getElementById('closeDrawerBtn');
@@ -64,10 +64,10 @@ function attachCommentListeners() {
       const postId = btn.getAttribute('data-post-id');
       currentPostId = postId;
 
-      // Show drawer
+      
       drawer.classList.remove('translate-y-full');
 
-      // Fetch and display comments
+      
       try {
         const res = await fetch(`http://localhost:3000/api/comments/post/${postId}`);
         const comments = await res.json();
@@ -92,7 +92,7 @@ function attachCommentListeners() {
     });
   });
 
-  // Close drawer button
+  
   closeDrawerBtn.addEventListener('click', () => {
     drawer.classList.add('translate-y-full');
     currentPostId = null;
@@ -100,7 +100,7 @@ function attachCommentListeners() {
     commentInput.value = '';
   });
 
-  // Submit new comment
+  
   commentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -156,16 +156,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const countSpan = btn.querySelector('.like-count');
       let count = parseInt(countSpan.textContent, 10);
 
-      // Toggle liked class
+      
       btn.classList.toggle('liked');
 
       const isLiked = btn.classList.contains('liked');
 
-      // Toggle icon style
+      
       icon.classList.toggle('bi-heart', !isLiked);
       icon.classList.toggle('bi-heart-fill', isLiked);
 
-      // Update count
+      
       countSpan.textContent = isLiked ? count + 1 : count - 1;
     });
   });
