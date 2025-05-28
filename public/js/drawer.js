@@ -7,7 +7,7 @@ function attachCommentListeners() {
     btn.addEventListener('click', async () => {
       const postId = btn.getAttribute('data-post-id');
       currentPostId = postId;
-      // 👇 Affiche le drawer
+      // Affiche le drawer
       drawer.classList.remove('translate-y-full');
 
       try {
