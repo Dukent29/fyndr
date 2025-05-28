@@ -3,10 +3,10 @@ const router = express.Router();
 const authenticate = require('../middleware/auth');
 const { sendMessage, getConversation, getRecentConversations } = require('../controllers/messageController');
 
-// ➕ Envoyer un message
+//  Envoyer un message
 router.post('/send', authenticate, sendMessage);
 
-// 📥 Obtenir une conversation
+//  Obtenir une conversation
 router.get('/conversation/:userId', authenticate, getConversation);
 
 router.get('/recent', authenticate, getRecentConversations);
