@@ -49,14 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(messageCard);
       });
 
-      lucide.createIcons(); // Refresh icons if any injected dynamically
+      lucide.createIcons(); 
     })
     .catch(err => {
       console.error('Erreur complète :', err);
-      container.innerHTML = '<p>⚠️ Erreur lors du chargement.</p>';
+      container.innerHTML = '<p> Erreur lors du chargement.</p>';
     });
 
-  // Drawer logic
+  // Drawer
   const userDrawer = document.getElementById('user-drawer');
   const userList = document.getElementById('user-list');
   const openDrawerBtn = document.querySelector('i[data-lucide="user-plus"]');
