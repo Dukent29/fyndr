@@ -1,10 +1,10 @@
 const pool = require('../config/db');
 
-// ➕ Envoyer un message privé
+// Envoyer un message privé
 const sendMessage = async (req, res) => {
   const senderId = req.user.id;
-  const { receiverId } = req.params;  // ✅ From URL
-  const { content } = req.body;          // ✅ From body
+  const { receiverId } = req.params;  
+  const { content } = req.body;         
 
   if (!receiverId || !content) {
     return res.status(400).json({ message: 'Receiver and content are required' });
@@ -23,7 +23,7 @@ const sendMessage = async (req, res) => {
 };
 
 
-// 📥 Obtenir la conversation avec un utilisateur
+// Obtenir la conversation avec un utilisateur
 const getConversation = async (req, res) => {
   const user1 = req.user.id;
   const user2 = req.params.userId;
@@ -49,7 +49,7 @@ const getConversation = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-// 🔁 Liste des conversations récentes
+// Liste des conversations récentes
 const getRecentConversations = async (req, res) => {
   const currentUserId = req.user.id;
 
