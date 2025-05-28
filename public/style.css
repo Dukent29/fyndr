@@ -14,8 +14,6 @@ body {
   flex-direction: column;
 }
 
-
-
 .stories-wrapper {
   display: flex;
   gap: 0.8rem;
@@ -318,3 +316,4 @@ input#commentInput {
   gap: 10px;
   margin-bottom: 20px;
 }
+/* profile */

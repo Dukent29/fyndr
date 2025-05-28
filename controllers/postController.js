@@ -56,4 +56,15 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { createPost, getAllPosts, deletePost };
+const getUserPosts = async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const [rows] = await pool.query('SELECT id, image_url FROM posts WHERE user_id = ?', [userId]);
+    res.status(200).json(rows);
+  } catch (err) {
+    res.status(500).json({ message: 'Erreur lors de la récupération des posts' });
+  }
+};
+
+
+module.exports = { createPost, getAllPosts, deletePost, getUserPosts };

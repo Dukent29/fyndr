@@ -4,20 +4,286 @@
 <head>
   <meta charset="UTF-8">
   <title>Inscription</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style-register.css" />
 </head>
+<style>
+  /* Police principale */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    max-width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  
+    display: flex;
+    flex-direction: column;
+    min-height: 852px;
+  }
+  
+  /* En-tête */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  .logo {
+    color: #E83338;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  
+  .close {
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Barre de progression */
+  .progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0 12px;
+  }
+  
+  .line {
+    width: 40px;
+    height: 2px;
+    background-color: #E83338;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: #E83338;
+    flex-shrink: 0;
+  }
+  
+  .dot.active {
+    background-color: #E83338;
+  }
+  
+  /* Contenu */
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+  }
+  
+  /* Titres */
+  .title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 45px;
+  }
+  
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 10px;
+  }
+  
+  /* Formulaire */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  form input {
+    width: 75%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e1e1e;
+    color: white;
+    margin-bottom: 8px;
+    max-width: 300px;
+    font-size: 14px;
+  }
+  
+  form input::placeholder {
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .form-label {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 6px;
+    text-align: left;
+    width: 70%;
+    max-width: 300px;
+  }
+  
+  /* Case à cocher */
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 14px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    transform: translateY(0,25px); /* Ajustement visuel parfait */
+    margin: 0;
+  }
+  
+  .checkbox-container label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .checkbox-container a {
+    color: #E83338;
+    text-decoration: none;
+  }
+  
+  /* Boutons */
+  form button {
+    background-color: #E83338;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease;
+    margin: 60px auto 0 auto;
+  }
+  
+  form button:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+  }
+
+  form {
+    padding-bottom: 130px; /* espace de sécurité pour le footer */
+  }
+  
+  
+  /* Footer */
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 390px;
+    background-color: #1A1A1A;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.75rem 0;
+    border-top: 1px solid #333;
+    z-index: 100;
+  }
+  
+  footer button {
+    font-size: 0.875rem;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .footer button:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+    color: white;
+  }
+  
+  footer button.active {
+    color: #E83338;
+  }
+  
+</style>
 <body>
-  <h2>Inscription</h2>
+  
+
+  <div class="header">
+    <div class="logo">Fyndr
+        <img src=""> 
+    </div>
+    <div class="close">&times;</div>
+  </div>
+
+  <div class="progress">
+  <div class="dot active"></div>
+  <div class="line"></div>
+  <div class="dot"></div>
+  <div class="line"></div>
+  <div class="dot"></div>
+</div>
+
+
+  <div class="container">
+    <div class="title">Inscription</div>
+    <div class="subtitle">
+      Nouveau ici ? Rejoins-nous en quelques secondes !
+    </div>
+
   <form id="registerForm">
+    <label class="form-label">Identifiant</label>
     <input type="text" id="regUsername" placeholder="Nom d'utilisateur" required><br>
+    <label class="form-label">Adresse mail</label>
     <input type="email" id="regEmail" placeholder="Email" required><br>
+    <label class="form-label">Mot de passe</label>
     <input type="password" id="regPassword" placeholder="Mot de passe" required><br>
+    <label class="form-label">Numéro de téléphone</label>
     <input type="tel" id="regPhone" placeholder="Téléphone" required><br>
+    <label class="form-label">Date de naissance</label>
     <input type="date" id="regDob" required><br>
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="agree" checked />
+      <label for="agree">
+        J'accepte les <a href="#">conditions d'utilisation</a>
+      </label>
+    </div>
+
     <button type="submit">S'inscrire</button>
   </form>
 
-  <script src="js/auth.js"></script>
+  
+
+  <!-- Footer
+<footer class="footer">
+  <button class="active"><i data-lucide="home"></i></button>
+  <button><i data-lucide="globe"></i></button>
+  <button class="fyndr-button"><img src="logo-fyndr.png" alt="Fyndr"></button>
+  <button><i data-lucide="message-circle"></i></button>
+  <button><i data-lucide="user"></i></button>
+</footer> -->
+
+<script src="js/auth.js"></script>
   <script src="js/redirectIfAuthenticated.js"></script>
+<script>lucide.createIcons();</script>
 
 </body>
 </html>

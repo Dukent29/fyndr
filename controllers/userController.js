@@ -82,8 +82,27 @@ const logout = (req, res) => {
   res.status(200).json({ message: 'Logout successful' });
 };
 
+const getCurrentUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const [rows] = await pool.query('SELECT id, username, email FROM users WHERE id = ?', [userId]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+
+    res.status(200).json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
+
+
 module.exports = {
   register,
   login,
   logout,
+  getCurrentUser
 };

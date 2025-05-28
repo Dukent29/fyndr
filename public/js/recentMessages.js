@@ -30,10 +30,19 @@ document.addEventListener('DOMContentLoaded', () => {
       data.forEach(msg => {
         const messageCard = document.createElement('div');
         messageCard.className = 'message-card';
+
+        // Avatar URL fallback
+        const avatarUrl = msg.avatar_url || `https://api.dicebear.com/6.x/personas/svg?seed=${msg.other_username}`;
+
         messageCard.innerHTML = `
-          <strong>${msg.other_username}</strong><br>
-          <span>${msg.content}</span><br>
-          <small>${new Date(msg.created_at).toLocaleString()}</small>
+          <div class="message-left">
+            <img class="avatar" src="${avatarUrl}" alt="Avatar of ${msg.other_username}">
+          </div>
+          <div class="message-right">
+            <strong>${msg.other_username}</strong>
+            <span>${msg.content}</span>
+            <small>${new Date(msg.created_at).toLocaleString()}</small>
+          </div>
         `;
 
         messageCard.addEventListener('click', () => {
