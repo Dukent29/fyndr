@@ -1,8 +1,8 @@
-const pool = require('../config/db'); // Make sure your database connection is imported
+const pool = require('../config/db');  database connection 
 
 const createPost = async (req, res) => {
   const { caption } = req.body;
-  const user_id = req.user.id; // Use user ID from token
+  const user_id = req.user.id; //  user ID 
   const image = req.file ? req.file.filename : null;
 
   if (!caption || !image) {
@@ -42,7 +42,7 @@ const deletePost = async (req, res) => {
   const user_id = req.user.id;
 
   try {
-    // Ensure user can only delete their own posts
+    //  user  their own posts
     const [result] = await pool.query('DELETE FROM posts WHERE id = ? AND user_id = ?', [postId, user_id]);
 
     if (result.affectedRows === 0) {
