@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   <i data-lucide="message-circle" class="message-icon" data-id="${user.id}"></i>
       `;
 
-      // Handle click on entire card (or just the icon)
+      
       card.addEventListener("click", () => {
         window.location.href = `conversation.html?userId=${user.id}`;
       });
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       userList.appendChild(card);
     });
 
-    lucide.createIcons(); // Re-render Lucide icons
+    lucide.createIcons(); 
   } catch (err) {
     console.error("Failed to load users:", err);
     userList.innerHTML = "<p>Erreur de chargement des utilisateurs</p>";
