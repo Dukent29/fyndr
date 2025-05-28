@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../middleware/upload');      // ✅ Make sure this is correct
-const authenticate = require('../middleware/auth');  // ✅ This should be your JWT middleware
+const upload = require('../middleware/upload');      
+const authenticate = require('../middleware/auth');  
 const { createPost, getAllPosts, deletePost,getUserPosts } = require('../controllers/postController');
 
 
