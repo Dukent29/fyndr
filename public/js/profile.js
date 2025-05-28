@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!token) return alert("Utilisateur non connecté");
 
   try {
-    // 1. Récupérer les infos du user
+    
     const userRes = await fetch('http://localhost:3000/api/users/me', {
       headers: {
         Authorization: `Bearer ${token}`
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('followers').textContent = user.followers || 0;
     document.getElementById('following').textContent = user.following || 0;
 
-    // 2. Récupérer les posts du user
+    
     const postRes = await fetch('http://localhost:3000/api/posts/me/posts', {
       headers: {
         Authorization: `Bearer ${token}`
