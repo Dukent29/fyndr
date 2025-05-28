@@ -29,9 +29,15 @@ async function fetchAndDisplayPosts() {
         <img src="http://localhost:3000/uploads/${post.image_url}" alt="Post Image" class="post-image" />
         <p class="caption">${post.caption}</p>
         <div class="post-actions">
-          <span>❤️ 152</span>
-          <button class="openCommentBtn" data-post-id="${post.id}">💬 Commenter</button>
-        </div>
+  <a href="#" class="like-btn">
+    <i class="bi bi-heart-fill"></i>
+    <span class="like-count">152</span>
+  </a>
+  <button class="openCommentBtn" data-post-id="${post.id}">
+    <i class="bi bi-chat-dots"></i> Commenter
+  </button>
+</div>
+
       `;
 
       postList.appendChild(postCard);
@@ -43,7 +49,7 @@ async function fetchAndDisplayPosts() {
     const postList = document.getElementById('postList');
     postList.innerHTML = '<p>Failed to load posts.</p>';
   }
-}
+}Z
 
 // Attach listeners to comment buttons and drawer
 function attachCommentListeners() {
@@ -140,3 +146,29 @@ function attachCommentListeners() {
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.like-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const icon = btn.querySelector('i');
+      const countSpan = btn.querySelector('.like-count');
+      let count = parseInt(countSpan.textContent, 10);
+
+      // Toggle liked class
+      btn.classList.toggle('liked');
+
+      const isLiked = btn.classList.contains('liked');
+
+      // Toggle icon style
+      icon.classList.toggle('bi-heart', !isLiked);
+      icon.classList.toggle('bi-heart-fill', isLiked);
+
+      // Update count
+      countSpan.textContent = isLiked ? count + 1 : count - 1;
+    });
+  });
+});
+
+

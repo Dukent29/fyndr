@@ -317,3 +317,38 @@ input#commentInput {
   margin-bottom: 20px;
 }
 /* profile */
+
+.like-btn.liked i {
+  color: #ff2d55;
+}
+
+.message.sender {
+  background-color: #ffffff;
+  color: #000;
+  align-self: flex-end;
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 70%;
+  margin: 5px 0;
+}
+
+.message.receiver {
+  background-color: #ff2d55;
+  color: #fff;
+  align-self: flex-start;
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 70%;
+  margin: 5px 0;
+}
+
+#message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+}
+
+
+
+

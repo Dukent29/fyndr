@@ -3,12 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <title>Fyndr - private</title>
+  <style>
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    max-width: 393px;
+    height: 852px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  
+    /* Pour aligner verticalement les sections principales */
+    display: flex;
+    flex-direction: column;
+    /* optionnel : si tu veux que ça prenne toute la hauteur */
+    min-height: 852px;
+  }
+
+/* En-tête */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  /* Logo */
+  .logo {
+    color: #E83338;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  
+  /* Bouton fermer */
+  .close {
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+  }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 16px;
+  gap: 20px;
+}
+
+p{
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    color: #ccc ;
+}
+
+#logoutBtn {
+  background-color: #e83338;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+  .footer-nav {
+      width: 390px;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid #333;
+      z-index: 10;
+    }
+
+    .footer-nav a {
+      color: #888;
+    }
+
+    .footer-nav i {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+  </style>
   
 </head>
 <body>
+  <div class="app-wrapper">
+    <header style="display: flex; flex-direction: column; align-items: center; padding: 16px;">
+  <div style="align-self: flex-start;">
+    <a href="index.html">
+      <i data-lucide="arrow-left" style="color: white;"></i>
+    </a>
+  </div>
+  <img src="assets/images/logo-1.png" alt="logo" style="height: 20px; margin-top: 12px;" />
+</header>
+
+   <div class="content">
+  <h2>Se déconnecter ?</h2>
+  <p>C’est déjà l’heure de faire une pause ? Revenez vite dans le game.</p>
   <button id="logoutBtn">Logout</button>
+</div>
+
   <script src="js/private.js"></script>
+  <footer class="footer-nav">
+    <a href="index.html"><i data-lucide="home"></i></a>
+    <a href="#"><i data-lucide="globe"></i></a>
+    <a href="add-post.html">
+      <img src="assets/images/logo-fyndr.png" style="width: 28px; border-radius: 8px;" alt="Fyndr">
+    </a>
+    <a href="messages.html"><i data-lucide="message-circle"></i></a>
+    <a href="profile.html"><i data-lucide="user"></i></a>
+  </footer>
+  
+<script>
+    lucide.createIcons();
+  </script>
+
 </body>
 </html>

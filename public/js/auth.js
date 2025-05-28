@@ -22,7 +22,7 @@ if (registerForm) {
 
       if (!res.ok) throw new Error('Erreur inscription');
       alert("Inscription réussie ! Connecte-toi maintenant.");
-      window.location.href = "login.html";
+      window.location.href = "profile-success.html";
     } catch (err) {
       alert("Erreur: " + err.message);
     }
