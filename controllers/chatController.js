@@ -23,9 +23,9 @@ exports.getMessages = async (req, res) => {
 };
 
 exports.sendMessage = async (req, res) => {
-    const { username, message, recipientUsername, recipientId } = req.body;
+    const { username, ciphertextEmoji, saltB64, recipientUsername, recipientId } = req.body;
 
-    if (!username || !message || !recipientUsername) {
+    if (!username || !ciphertextEmoji || !saltB64 || !recipientUsername) {
         return res.status(400).json({ error: 'Données manquantes' });
     }
 
@@ -40,9 +40,11 @@ exports.sendMessage = async (req, res) => {
             userId = users[0].id;
         }
 
+        const createdAt = new Date().toISOString().slice(0, 23).replace('T', ' ');
+
         const [result] = await db.query(
-            'INSERT INTO messages (user_id, username, message, recipient_id, recipient_username) VALUES (?, ?, ?, ?, ?)',
-            [userId, username, message, recipientId, recipientUsername]
+            'INSERT INTO messages (user_id, username, ciphertext_emoji, salt_b64, recipient_id, recipient_username, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [userId, username, ciphertextEmoji, saltB64, recipientId, recipientUsername, createdAt]
         );
 
         const [newMessage] = await db.query('SELECT * FROM messages WHERE id = ?', [result.insertId]);

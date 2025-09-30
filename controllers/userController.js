@@ -40,3 +40,23 @@ exports.createOrGetUser = async (req, res) => {
         res.status(500).json({ error: 'Erreur serveur' });
     }
 };
+
+exports.getUserUUID = async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        const [users] = await db.query(
+            'SELECT user_uuid FROM users WHERE username = ?',
+            [username]
+        );
+
+        if (users.length === 0) {
+            return res.status(404).json({ error: 'Utilisateur non trouvé' });
+        }
+
+        res.json({ user_uuid: users[0].user_uuid });
+    } catch (error) {
+        console.error('Erreur:', error);
+        res.status(500).json({ error: 'Erreur serveur' });
+    }
+};

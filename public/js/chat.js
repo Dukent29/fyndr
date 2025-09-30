@@ -3,6 +3,8 @@ const chatWith = localStorage.getItem('chatWith');
 const chatWithId = localStorage.getItem('chatWithId');
 const VIGENERE_KEY = 'EmoCrypt2025';
 let decryptedMessages = new Set();
+let currentUserUUID = null;
+let chatWithUUID = null;
 
 if (!username || !chatWith) {
     window.location.href = 'index.html';
@@ -13,6 +15,108 @@ document.getElementById('chatInitial').textContent = chatWith.charAt(0).toUpperC
 
 let messages = [];
 
+/**
+ * 🧠 Utilitaires bas niveau : encodage & hash
+ */
+function utf8Bytes(str) {
+    return new TextEncoder().encode(str);
+}
+
+function bytesToBase64(u8) {
+    let s = "";
+    for (const b of u8) s += String.fromCharCode(b);
+    return btoa(s);
+}
+
+function base64ToBytes(b64) {
+    const bin = atob(b64);
+    const out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+}
+
+/**
+ * 🔐 SHA-256 (hash cryptographique)
+ */
+async function sha256Bytes(inputStr) {
+    const data = utf8Bytes(inputStr);
+    const digest = await crypto.subtle.digest("SHA-256", data);
+    return new Uint8Array(digest);
+}
+
+/**
+ * 🧂 Génération du sel (UUIDs + timestamp → SHA-256 → base64)
+ */
+async function makeSaltB64(senderUUID, recipientUUID, timestampMs) {
+    const [low, high] = [senderUUID, recipientUUID].sort();
+    const material = `${low}::${high}::${timestampMs}`;
+    const hash = await sha256Bytes(material);
+    return bytesToBase64(hash);
+}
+
+/**
+ * 🌀 Convertit le hash SHA-256 en liste d'offsets (0..999)
+ */
+function saltOffsetsFromB64(saltB64) {
+    const b = base64ToBytes(saltB64);
+    const out = [];
+    for (let i = 0; i < b.length; i += 2) {
+        const v = (b[i] << 8) | (b[i + 1] ?? 0);
+        out.push(v % 1000);
+    }
+    return out;
+}
+
+/**
+ * 🔐 Vigenère Unicode → Emoji avec sel
+ */
+function encryptVigenereEmojiSalted(text, key, saltB64) {
+    const keyPoints = [...key].map(c => c.codePointAt(0));
+    const saltOffsets = saltOffsetsFromB64(saltB64);
+    const kLen = keyPoints.length;
+    const sLen = saltOffsets.length;
+    const result = [];
+
+    [...text].forEach((char, i) => {
+        const base = char.codePointAt(0);
+        const shift = (keyPoints[i % kLen] + saltOffsets[i % sLen]) % 100;
+        const newCode = base + shift + 128400;
+
+        try {
+            result.push(String.fromCodePoint(newCode));
+        } catch {
+            result.push(char);
+        }
+    });
+
+    return result.join('');
+}
+
+/**
+ * 🔓 Déchiffrement symétrique Vigenère avec sel
+ */
+function decryptVigenereEmojiSalted(cipherText, key, saltB64) {
+    const keyPoints = [...key].map(c => c.codePointAt(0));
+    const saltOffsets = saltOffsetsFromB64(saltB64);
+    const kLen = keyPoints.length;
+    const sLen = saltOffsets.length;
+    const result = [];
+
+    [...cipherText].forEach((char, i) => {
+        const base = char.codePointAt(0);
+        const shift = (keyPoints[i % kLen] + saltOffsets[i % sLen]) % 100;
+        const newCode = base - shift - 128400;
+
+        try {
+            result.push(String.fromCodePoint(newCode));
+        } catch {
+            result.push(char);
+        }
+    });
+
+    return result.join('');
+}
+
 function toggleMessageDecrypt(messageId) {
     if (decryptedMessages.has(messageId)) {
         decryptedMessages.delete(messageId);
@@ -22,46 +126,24 @@ function toggleMessageDecrypt(messageId) {
     displayMessages();
 }
 
-function encryptVigenereEmoji(text, key) {
-    const keyPoints = [...key].map(c => c.codePointAt(0));
-    const keyLen = keyPoints.length;
-    const result = [];
+async function loadUserUUIDs() {
+    try {
+        const [currentUserResponse, chatWithResponse] = await Promise.all([
+            fetch(`/api/users/uuid/${encodeURIComponent(username)}`),
+            fetch(`/api/users/uuid/${encodeURIComponent(chatWith)}`)
+        ]);
 
-    [...text].forEach((char, i) => {
-        const base = char.codePointAt(0);
-        const shift = (keyPoints[i % keyLen] % 1000) + 128400;
-        const newCode = base + shift;
+        const currentUserData = await currentUserResponse.json();
+        const chatWithData = await chatWithResponse.json();
 
-        try {
-            result.push(String.fromCodePoint(newCode));
-        } catch {
-            result.push(char);
-        }
-    });
-
-    return result.join('');
+        currentUserUUID = currentUserData.user_uuid;
+        chatWithUUID = chatWithData.user_uuid;
+    } catch (error) {
+        console.error('Erreur chargement UUIDs:', error);
+    }
 }
 
-function decryptVigenereEmoji(cipherText, key) {
-    const keyPoints = [...key].map(c => c.codePointAt(0));
-    const keyLen = keyPoints.length;
-    const result = [];
-
-    [...cipherText].forEach((char, i) => {
-        const base = char.codePointAt(0);
-        const shift = (keyPoints[i % keyLen] % 1000) + 128400;
-        const newCode = base - shift;
-
-        try {
-            result.push(String.fromCodePoint(newCode));
-        } catch {
-            result.push(char);
-        }
-    });
-
-    return result.join('');
-}
-
+loadUserUUIDs();
 loadMessages();
 setInterval(loadMessages, 2000);
 
@@ -85,7 +167,7 @@ async function loadMessages() {
     }
 }
 
-function displayMessages() {
+async function displayMessages() {
     const container = document.getElementById('messagesContainer');
 
     if (messages.length === 0) {
@@ -102,7 +184,11 @@ function displayMessages() {
         return;
     }
 
-    container.innerHTML = messages.map(msg => {
+    if (!currentUserUUID || !chatWithUUID) {
+        await loadUserUUIDs();
+    }
+
+    const messagesHTML = await Promise.all(messages.map(async msg => {
         const isOwn = msg.username === username;
         const time = new Date(msg.created_at).toLocaleTimeString('fr-FR', {
             hour: '2-digit',
@@ -110,7 +196,15 @@ function displayMessages() {
         });
         const initial = msg.username.charAt(0).toUpperCase();
         const isDecrypted = decryptedMessages.has(msg.id);
-        const displayMessage = isOwn ? decryptVigenereEmoji(msg.message, VIGENERE_KEY) : (isDecrypted ? decryptVigenereEmoji(msg.message, VIGENERE_KEY) : msg.message);
+
+        let displayMessage = msg.ciphertext_emoji;
+
+        if (msg.salt_b64 && currentUserUUID && chatWithUUID) {
+            if (isOwn || isDecrypted) {
+                displayMessage = decryptVigenereEmojiSalted(msg.ciphertext_emoji, VIGENERE_KEY, msg.salt_b64);
+            }
+        }
+
         const showButton = !isOwn;
         const buttonText = isDecrypted ? 'Masquer' : 'Afficher';
 
@@ -129,8 +223,9 @@ function displayMessages() {
                 </div>
             </div>
         `;
-    }).join('');
+    }));
 
+    container.innerHTML = messagesHTML.join('');
     container.scrollTop = container.scrollHeight;
 }
 
@@ -140,7 +235,13 @@ async function sendMessage() {
 
     if (!message) return;
 
-    const encryptedMessage = encryptVigenereEmoji(message, VIGENERE_KEY);
+    if (!currentUserUUID || !chatWithUUID) {
+        await loadUserUUIDs();
+    }
+
+    const timestampMs = Date.now();
+    const saltB64 = await makeSaltB64(currentUserUUID, chatWithUUID, timestampMs);
+    const encryptedMessage = encryptVigenereEmojiSalted(message, VIGENERE_KEY, saltB64);
 
     try {
         const response = await fetch('/api/messages', {
@@ -150,7 +251,8 @@ async function sendMessage() {
             },
             body: JSON.stringify({
                 username: username,
-                message: encryptedMessage,
+                ciphertextEmoji: encryptedMessage,
+                saltB64: saltB64,
                 recipientUsername: chatWith,
                 recipientId: chatWithId
             })
