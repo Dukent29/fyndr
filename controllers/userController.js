@@ -14,11 +14,13 @@ exports.getAllUsers = async (req, res) => {
 
 exports.createOrGetUser = async (req, res) => {
     try {
-        const { username } = req.body;
+        let { username } = req.body;
 
         if (!username || username.length < 2) {
             return res.status(400).json({ error: 'Le nom doit contenir au moins 2 caractères' });
         }
+
+        username = username.toLowerCase();
 
         const [existing] = await db.query(
             'SELECT id, username FROM users WHERE username = ?',
@@ -43,7 +45,8 @@ exports.createOrGetUser = async (req, res) => {
 
 exports.getUserUUID = async (req, res) => {
     try {
-        const { username } = req.params;
+        let { username } = req.params;
+        username = username.toLowerCase();
 
         const [users] = await db.query(
             'SELECT user_uuid FROM users WHERE username = ?',

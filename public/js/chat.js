@@ -80,7 +80,7 @@ function encryptVigenereEmojiSalted(text, key, saltB64) {
     [...text].forEach((char, i) => {
         const base = char.codePointAt(0);
         const shift = (keyPoints[i % kLen] + saltOffsets[i % sLen]) % 100;
-        const newCode = base + shift + 128400;
+        const newCode = base >= 128400 ? base + shift - 128400 - 70 : base + shift + 128400;
 
         try {
             result.push(String.fromCodePoint(newCode));
@@ -105,7 +105,7 @@ function decryptVigenereEmojiSalted(cipherText, key, saltB64) {
     [...cipherText].forEach((char, i) => {
         const base = char.codePointAt(0);
         const shift = (keyPoints[i % kLen] + saltOffsets[i % sLen]) % 100;
-        const newCode = base - shift - 128400;
+        const newCode = base < 128400 ? base - shift + 128400 + 70 : base - shift - 128400;
 
         try {
             result.push(String.fromCodePoint(newCode));
@@ -276,3 +276,32 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+
+let pickerInitialized = false;
+
+function toggleEmojiPicker() {
+    const pickerContainer = document.getElementById('emojiPicker');
+
+    if (!pickerInitialized) {
+        const picker = document.createElement('emoji-picker');
+        pickerContainer.appendChild(picker);
+
+        picker.addEventListener('emoji-click', event => {
+            const input = document.getElementById('messageInput');
+            input.value += event.detail.unicode;
+            input.focus();
+        });
+
+        pickerInitialized = true;
+    }
+
+    pickerContainer.classList.toggle('show');
+}
+
+document.addEventListener('click', function(e) {
+    const picker = document.getElementById('emojiPicker');
+    const emojiBtn = document.querySelector('.emoji-btn');
+    if (picker && !picker.contains(e.target) && !emojiBtn.contains(e.target)) {
+        picker.classList.remove('show');
+    }
+});

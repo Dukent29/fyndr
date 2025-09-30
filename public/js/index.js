@@ -20,7 +20,7 @@ document.getElementById('usernameForm').addEventListener('submit', async functio
         const data = await response.json();
 
         if (response.ok) {
-            localStorage.setItem('username', username);
+            localStorage.setItem('username', data.username);
             window.location.href = 'users.html';
         } else {
             errorDiv.textContent = data.error || 'Erreur de connexion';

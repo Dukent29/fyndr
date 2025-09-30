@@ -23,7 +23,7 @@ async function loadUsers() {
     try {
         const response = await fetch('/api/users');
         const users = await response.json();
-        allUsers = users.filter(u => u.username !== currentUsername);
+        allUsers = users.filter(u => u.username.toLowerCase() !== currentUsername.toLowerCase());
 
         document.getElementById('contactCount').textContent = `${allUsers.length} contact${allUsers.length > 1 ? 's' : ''} disponible${allUsers.length > 1 ? 's' : ''}`;
 

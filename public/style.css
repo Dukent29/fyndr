@@ -607,20 +607,29 @@ button[type="submit"]:hover,
     display: flex;
     gap: 12px;
     background: var(--card);
+    position: relative;
 }
 
-.input-container input {
+.input-wrapper {
     flex: 1;
-    padding: 16px 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    flex: 1;
+    padding: 16px 56px 16px 18px;
     border: 1px solid var(--border);
     border-radius: 12px;
     font-size: 17px;
     background: var(--bg);
     letter-spacing: -0.022em;
     transition: all 0.2s ease;
+    width: 100%;
 }
 
-.input-container input:focus {
+.input-wrapper input:focus {
     outline: none;
     border-color: var(--primary);
     background: var(--bg);
@@ -851,5 +860,51 @@ button[type="submit"]:hover,
     flex-direction: column;
     height: 100vh;
     background: var(--card);
+}
+
+.emoji-btn {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.emoji-btn:hover {
+    background: var(--hover);
+}
+
+.emoji-picker {
+    display: none;
+    position: absolute;
+    bottom: 90px;
+    right: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.emoji-picker.show {
+    display: block;
+}
+
+.emoji-picker emoji-picker {
+    --border-radius: 12px;
+    --background: var(--bg);
+    --border-color: var(--border);
+    --category-font-color: var(--text);
+    --input-font-color: var(--text);
+    --num-columns: 8;
 }
 
