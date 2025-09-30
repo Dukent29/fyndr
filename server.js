@@ -2,13 +2,10 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const authMiddleware = require('./middleware/auth');
-const userRoutes = require('./routes/users');
-const postRoutes = require('./routes/posts'); 
-const db = require('./config/db');
 const path = require('path');
-const commentRoutes = require('./routes/comments');
-const messageRoutes = require('./routes/messages');
+const chatRoutes = require('./routes/chat');
+const userRoutes = require('./routes/users');
+const db = require('./config/db');
 
 dotenv.config();
 
@@ -17,25 +14,19 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Test DB connection
 db.getConnection()
-  .then(() => console.log(' Connected to MySQL'))
-  .catch(err => console.error(' MySQL connection failed:', err));
+  .then(() => console.log('✓ Connected to MySQL'))
+  .catch(err => console.error('✗ MySQL connection failed:', err));
 
-// Routes
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes); 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve images
-app.use('/api/comments', commentRoutes);
-app.use('/api/messages', messageRoutes);
-
-// Protected test
-app.get('/api/protected', authMiddleware, (req, res) => {
-  res.json({ message: 'You are authenticated', user: req.user });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start server
+app.use('/api/messages', chatRoutes);
+app.use('/api/users', userRoutes);
+
 app.listen(PORT, () => {
-  console.log(` Server running at http://localhost:${PORT}`);
+  console.log(`✓ EmoCrypt running at http://localhost:${PORT}`);
 });

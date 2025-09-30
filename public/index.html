@@ -1,103 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <title>Fyndr - Homepage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="style.css" />
-</head> 
-<body>  
-  <div class="container">
-
-    <!-- Logo -->
-    <header style="display:flex; justify-content:center; padding:0.75rem 0; border-bottom: 1px solid #222;">
-      <img src="assets/images/logo-1.png" alt="Logo" style="height:24px;">
-    </header>
-
-    <!-- Stories -->
-    <section class="stories">
-      <div class="stories-slider">
-        <div class="story"><div class="story-ring ring-current-user"><img src="https://i.pravatar.cc/100?u=1" alt="You"></div><p>You</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=2" alt="Linz"></div><p>Linz</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=3" alt="Shub"></div><p>Shub</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=4" alt="Jayk"></div><p>Jayk</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=5" alt="Emma"></div><p>Emma</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=6" alt="Noah"></div><p>Noah</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=7" alt="Léa"></div><p>Léa</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=8" alt="Max"></div><p>Max</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=9" alt="Zoé"></div><p>Zoé</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=10" alt="Tom"></div><p>Tom</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=11" alt="Chloé"></div><p>Chloé</p></div>
-        <div class="story"><div class="story-ring"><img src="https://i.pravatar.cc/100?u=12" alt="Alex"></div><p>Alex</p></div>
-      </div>
-    </section>
-
-    <!-- Posts Slider -->
-    <main>
-      <section id="postSection">
-        <h2>Latest Posts</h2>
-        <div id="postList" class="post-list">
-          <!-- Posts will be injected here dynamically -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmoCrypt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="welcome-content">
+                <div class="brand">
+                    <img src="icon.png" alt="EmoCrypt" class="brand-icon">
+                    <h1><span class="brand-light">Emo</span><span class="brand-bold">Crypt</span></h1>
+                </div>
+                <div class="hero-section">
+                    <h2 class="hero-title">Messages privés.<br>Chiffrés par défaut.</h2>
+                    <p class="hero-subtitle">Vos conversations sont protégées par un chiffrement de bout en bout. Vous seul pouvez les lire.</p>
+                </div>
+                <div class="features">
+                    <div class="feature-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/>
+                            <path d="M8 11V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <div>
+                            <h4>Sécurité maximale</h4>
+                            <p>Chiffrement Vigenère avec clé unique</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div>
+                            <h4>Aucune collecte</h4>
+                            <p>Zéro tracking, zéro métadonnées</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        <div>
+                            <h4>Contrôle total</h4>
+                            <p>Afficher ou masquer à volonté</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <button class="active"><i data-lucide="home"></i></button>
-      <a href="feed.html">
-        <button><i data-lucide="globe"></i></button>
-      </a>
-      <a href="add-post.html">
-        <button class="fyndr-button"><img src="assets/images/logo-fyndr.png" alt="Fyndr"></button>
-      </a>
-      <a href="messages.html">
-        <button><i data-lucide="message-circle"></i></button>
-      </a>
-      <a href="profile.html">
-        <button><i data-lucide="user"></i></button>
-      </a>
-    </footer>
-
-    <!-- Comment Drawer -->
-    <div id="commentDrawer" class="fixed bottom-0 left-1/2 
-  transform -translate-x-1/2 translate-y-full 
-  bg-white shadow-lg border-t 
-  max-h-[60vh]
-  overflow-y-auto 
-  transition-transform duration-300 
-   rounded-t-xl ">
-  <div class="flex justify-between items-center p-4 ">
-    <h3 class="text-lg font-semibold">Commentaires</h3>
-    <button id="closeDrawerBtn" class="text-gray-500 hover:text-red-500 text-xl">&times;</button>
-  </div>
-  <div id="commentsContainer" class="p-4 space-y-4">
-    <!-- Comments will appear here -->
-  </div>
-<!-- formulaire -->
-  <form id="commentForm" class="flex items-center border-t p-4 bg-transparent">
-    <input type="text" id="commentInput" placeholder="Ajouter un commentaire..." class="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring"
-      required
-    />
-    <button 
-      type="submit" 
-      class="ml-2 text-blue-500 font-semibold hover:text-blue-600"
-    >
-      Publier
-    </button>
-  </form>
+        <div class="login-right">
+            <div class="login-form-container">
+                <div class="form-header">
+                    <h2>Commencer</h2>
+                    <p>Entrez votre nom d'utilisateur pour accéder à vos messages</p>
+                </div>
+                <form id="usernameForm">
+                    <div class="input-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" id="username" name="username" required placeholder="alex" autocomplete="username">
+                    </div>
+                    <button type="submit">Continuer</button>
+                    <div id="error" class="error"></div>
+                </form>
+                <div class="form-hint">
+                    <p>Pas de compte ? Saisissez simplement un nom pour en créer un automatiquement.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script>lucide.createIcons();</script>
-  </div> 
- <script src="js/fetchPost.js"></script>
-<script src="js/authGuard.js"></script>
-<script src="js/comments.js"></script>
-
- 
-</body> 
-</html> 
+    <script src="js/index.js"></script>
+</body>
+</html>
