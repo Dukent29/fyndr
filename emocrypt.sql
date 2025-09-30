@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 30 sep. 2025 à 15:41
+-- Généré le : mar. 30 sep. 2025 à 16:47
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -40,15 +40,6 @@ CREATE TABLE `messages` (
   `created_at` datetime(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `messages`
---
-
-INSERT INTO `messages` (`id`, `user_id`, `username`, `recipient_id`, `recipient_username`, `ciphertext_emoji`, `salt_b64`, `algo`, `version`, `created_at`) VALUES
-(1, 1, 'test1', 2, 'test2', '🙊😸🙘🙠😱', 'tBaWPuYBtug/A83Ry7zJlma8hIrhfEQJo/DekNJZUfw=', 'vigenere-emoji-salted', 1, '2025-09-30 13:40:53.353'),
-(2, 2, 'test2', 1, 'test1', '😣😎🗳😠🗽🗙😥', 'mjfqdHEcxeOdzgDcV8qrHXVmVOOT34Y7/KXr7kPyfJQ=', 'vigenere-emoji-salted', 1, '2025-09-30 13:41:00.245'),
-(3, 2, 'test2', 1, 'test1', '🗶🗷😆🙧🗽🗥🗴', 'fer40ZPzFAoFdln4SF3JnNM/LTB3adfqVms6m3NSfZw=', 'vigenere-emoji-salted', 1, '2025-09-30 13:41:06.676');
-
 -- --------------------------------------------------------
 
 --
@@ -61,14 +52,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_uuid` char(36) DEFAULT uuid()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `created_at`, `user_uuid`) VALUES
-(1, 'test1', '2025-09-30 13:34:20', '2b7c6a7a-9e02-11f0-9a01-005056c00001'),
-(2, 'test2', '2025-09-30 13:34:24', '2e26368e-9e02-11f0-9a01-005056c00001');
 
 --
 -- Index pour les tables déchargées
@@ -98,13 +81,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
