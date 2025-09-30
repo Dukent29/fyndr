@@ -1,4 +1,4 @@
-const pool = require('../config/db');  database connection 
+const pool = require('../config/db'); // database connection 
 
 const createPost = async (req, res) => {
   const { caption } = req.body;
